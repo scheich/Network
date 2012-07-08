@@ -42,5 +42,8 @@ public class RadioNetwork extends Activity {
 		Intent i = new Intent();
 		i.setClassName( "com.android.settings", "com.android.settings.RadioInfo" );
 		startActivity(i);
+		
+		// Close this Activity
+		finish();
 	}
 }
