@@ -32,7 +32,7 @@ public class RadioNetwork extends Activity {
 
 		// Toast current Network Type
 		tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-		String type = "UNKOWN";
+		String type = "UNKNOWN";
 		if (tm.getNetworkType() == TelephonyManager.NETWORK_TYPE_UMTS)type = "UMTS";
 		if (tm.getNetworkType() == TelephonyManager.NETWORK_TYPE_EDGE)type = "EDGE";
 		if (tm.getNetworkType() == TelephonyManager.NETWORK_TYPE_GPRS)type = "GPRS";
