@@ -33,9 +33,35 @@ public class RadioNetwork extends Activity {
 		// Toast current Network Type
 		tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 		String type = "UNKNOWN";
-		if (tm.getNetworkType() == TelephonyManager.NETWORK_TYPE_UMTS)type = "UMTS";
+        switch (tm.getNetworkType()) {
+            case TelephonyManager.NETWORK_TYPE_GPRS: type = "GPRS"; break;
+            case TelephonyManager.NETWORK_TYPE_EDGE: type = "EDGE"; break;
+            case TelephonyManager.NETWORK_TYPE_UMTS: type = "UMTS"; break;
+            case TelephonyManager.NETWORK_TYPE_HSDPA: type = "HSDPA"; break;
+            case TelephonyManager.NETWORK_TYPE_HSUPA: type = "HSUPA"; break;
+            case TelephonyManager.NETWORK_TYPE_HSPA: type = "HSPA"; break;
+            case TelephonyManager.NETWORK_TYPE_HSPAP: type = "HSPA+"; break;
+            case TelephonyManager.NETWORK_TYPE_LTE: type = "LTE"; break;
+            case TelephonyManager.NETWORK_TYPE_IDEN: type = "iDEN"; break;
+            case TelephonyManager.NETWORK_TYPE_CDMA: type = "cmdaOne"; break;
+            case TelephonyManager.NETWORK_TYPE_1xRTT: type = "CDMA2000 1xRTT"; break;
+            case TelephonyManager.NETWORK_TYPE_EVDO_0: type = "CDMA2000 1xEV-DO Rev. 0"; break;
+            case TelephonyManager.NETWORK_TYPE_EVDO_A: type = "CDMA2000 1xEV-DO Rev. A"; break;
+            case TelephonyManager.NETWORK_TYPE_EVDO_B: type = "CDMA2000 1xEV-DO Rev. B"; break;
+            case TelephonyManager.NETWORK_TYPE_EHRPD: type = "CDMA2000 eHRPD"; break;
+            /* Constants not defined in SDK yet */
+            case 16 /* NETWORK_TYPE_GSM */: type = "GSM"; break;
+            /* Temporarily allocated by custom ROMs */
+            case 17 /* NETWORK_TYPE_TD_SCDMA */: type = "UMTS (TD-SDCDMA)"; break;
+            case 30 /* NETWORK_TYPE_DCHSPAP */: type = "DC-HSPA+"; break;
+        }
+
+        /*
+ 		if (tm.getNetworkType() == TelephonyManager.NETWORK_TYPE_UMTS)type = "UMTS";
 		if (tm.getNetworkType() == TelephonyManager.NETWORK_TYPE_EDGE)type = "EDGE";
 		if (tm.getNetworkType() == TelephonyManager.NETWORK_TYPE_GPRS)type = "GPRS";
+        if (tm.getNetworkType() == TelephonyManager.NETWORK_TYPE_1xRTT)
+        */
 		Toast.makeText(context, type, Toast.LENGTH_LONG).show();
 
 		// Launch Activity RadioInfo
