@@ -49,11 +49,12 @@ public class RadioNetwork extends Activity {
             case TelephonyManager.NETWORK_TYPE_EVDO_A: type = "CDMA2000 1xEV-DO Rev. A"; break;
             case TelephonyManager.NETWORK_TYPE_EVDO_B: type = "CDMA2000 1xEV-DO Rev. B"; break;
             case TelephonyManager.NETWORK_TYPE_EHRPD: type = "CDMA2000 eHRPD"; break;
-            /* Constants not defined in SDK yet */
-            case 16 /* NETWORK_TYPE_GSM */: type = "GSM"; break;
+            case TelephonyManager.NETWORK_TYPE_GSM: type = "GSM"; break;
+            case TelephonyManager.NETWORK_TYPE_TD_SCDMA: type = "UMTS (TD-SDCDMA)"; break;
+            case TelephonyManager.NETWORK_TYPE_IWLAN: type = "IWLAN"; break;
             /* Temporarily allocated by custom ROMs */
-            case 17 /* NETWORK_TYPE_TD_SCDMA */: type = "UMTS (TD-SDCDMA)"; break;
             case 30 /* NETWORK_TYPE_DCHSPAP */: type = "DC-HSPA+"; break;
+
         }
 
         /*
