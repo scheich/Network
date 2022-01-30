@@ -15,6 +15,7 @@ package pl.lebihan.network;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,42 +30,84 @@ public class RadioNetwork extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        context = getApplicationContext();
-
-        // Toast current Network Type
-        tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        String type = "UNKNOWN";
-        switch (tm.getNetworkType()) {
-            case TelephonyManager.NETWORK_TYPE_GPRS: type = "GPRS"; break;
-            case TelephonyManager.NETWORK_TYPE_EDGE: type = "EDGE"; break;
-            case TelephonyManager.NETWORK_TYPE_UMTS: type = "UMTS"; break;
-            case TelephonyManager.NETWORK_TYPE_HSDPA: type = "HSDPA"; break;
-            case TelephonyManager.NETWORK_TYPE_HSUPA: type = "HSUPA"; break;
-            case TelephonyManager.NETWORK_TYPE_HSPA: type = "HSPA"; break;
-            case TelephonyManager.NETWORK_TYPE_HSPAP: type = "HSPA+"; break;
-            case TelephonyManager.NETWORK_TYPE_LTE: type = "LTE"; break;
-            case TelephonyManager.NETWORK_TYPE_IDEN: type = "iDEN"; break;
-            case TelephonyManager.NETWORK_TYPE_CDMA: type = "cmdaOne"; break;
-            case TelephonyManager.NETWORK_TYPE_1xRTT: type = "CDMA2000 1xRTT"; break;
-            case TelephonyManager.NETWORK_TYPE_EVDO_0: type = "CDMA2000 1xEV-DO Rev. 0"; break;
-            case TelephonyManager.NETWORK_TYPE_EVDO_A: type = "CDMA2000 1xEV-DO Rev. A"; break;
-            case TelephonyManager.NETWORK_TYPE_EVDO_B: type = "CDMA2000 1xEV-DO Rev. B"; break;
-            case TelephonyManager.NETWORK_TYPE_EHRPD: type = "CDMA2000 eHRPD"; break;
-            case TelephonyManager.NETWORK_TYPE_GSM: type = "GSM"; break;
-            case TelephonyManager.NETWORK_TYPE_TD_SCDMA: type = "UMTS (TD-SDCDMA)"; break;
-            case TelephonyManager.NETWORK_TYPE_IWLAN: type = "IWLAN"; break;
-            /* Temporarily allocated by custom ROMs */
-            case 30 /* NETWORK_TYPE_DCHSPAP */: type = "DC-HSPA+"; break;
-
+        boolean canCheckNetworkType;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            int isReadPhoneStateGranted = checkSelfPermission(android.Manifest.permission.READ_PHONE_STATE);
+            canCheckNetworkType = isReadPhoneStateGranted == PackageManager.PERMISSION_GRANTED;
+        } else {
+            canCheckNetworkType = true;
         }
 
-        /*
- 		if (tm.getNetworkType() == TelephonyManager.NETWORK_TYPE_UMTS)type = "UMTS";
-		if (tm.getNetworkType() == TelephonyManager.NETWORK_TYPE_EDGE)type = "EDGE";
-		if (tm.getNetworkType() == TelephonyManager.NETWORK_TYPE_GPRS)type = "GPRS";
-        if (tm.getNetworkType() == TelephonyManager.NETWORK_TYPE_1xRTT)
-        */
-        Toast.makeText(context, type, Toast.LENGTH_LONG).show();
+        context = getApplicationContext();
+
+        if (canCheckNetworkType) {
+            // Toast current Network Type
+            tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            String type = "UNKNOWN";
+            switch (tm.getNetworkType()) {
+                case TelephonyManager.NETWORK_TYPE_GPRS:
+                    type = "GPRS";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_EDGE:
+                    type = "EDGE";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_UMTS:
+                    type = "UMTS";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_HSDPA:
+                    type = "HSDPA";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_HSUPA:
+                    type = "HSUPA";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_HSPA:
+                    type = "HSPA";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_HSPAP:
+                    type = "HSPA+";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_LTE:
+                    type = "LTE";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_IDEN:
+                    type = "iDEN";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_CDMA:
+                    type = "cmdaOne";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_1xRTT:
+                    type = "CDMA2000 1xRTT";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_EVDO_0:
+                    type = "CDMA2000 1xEV-DO Rev. 0";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_EVDO_A:
+                    type = "CDMA2000 1xEV-DO Rev. A";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_EVDO_B:
+                    type = "CDMA2000 1xEV-DO Rev. B";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_EHRPD:
+                    type = "CDMA2000 eHRPD";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_GSM:
+                    type = "GSM";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_TD_SCDMA:
+                    type = "UMTS (TD-SDCDMA)";
+                    break;
+                case TelephonyManager.NETWORK_TYPE_IWLAN:
+                    type = "IWLAN";
+                    break;
+                /* Temporarily allocated by custom ROMs */
+                case 30 /* NETWORK_TYPE_DCHSPAP */:
+                    type = "DC-HSPA+";
+                    break;
+
+            }
+
+            Toast.makeText(context, type, Toast.LENGTH_LONG).show();
+        }
 
         // Launch Activity RadioInfo
         Intent i = new Intent();
