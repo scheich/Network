@@ -1,0 +1,4 @@
+# Network
+This is a simple shortcut-app to a hidden preference, where the user can switch between the different network-modes and see general info.
+
+This is a fork of https://github.com/scheich/Network with Android 11 support added.
