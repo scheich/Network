@@ -16,6 +16,7 @@ package pl.lebihan.network;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
@@ -67,7 +68,11 @@ public class RadioNetwork extends Activity {
 
         // Launch Activity RadioInfo
         Intent i = new Intent();
-        i.setClassName( "com.android.settings", "com.android.settings.RadioInfo" );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            i.setClassName("com.android.phone", "com.android.phone.settings.RadioInfo");
+        } else {
+            i.setClassName("com.android.settings", "com.android.settings.RadioInfo");
+        }
         startActivity(i);
 
         // Close this Activity
