@@ -23,10 +23,6 @@ import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
 public class RadioNetwork extends Activity {
-
-    private Context context;
-    private TelephonyManager tm;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -38,11 +34,11 @@ public class RadioNetwork extends Activity {
             canCheckNetworkType = true;
         }
 
-        context = getApplicationContext();
+        Context context = getApplicationContext();
 
         if (canCheckNetworkType) {
             // Toast current Network Type
-            tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             String type = "UNKNOWN";
             switch (tm.getNetworkType()) {
                 case TelephonyManager.NETWORK_TYPE_GPRS:
